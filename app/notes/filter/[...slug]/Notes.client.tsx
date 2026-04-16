@@ -7,17 +7,15 @@ import {toast, Toaster} from "react-hot-toast";
 import css from "@/app/notes/page.module.css";
 import SearchBox from "@/components/SearchBox/SearchBox";
 import Pagination from "@/components/Pagination/Pagination";
-import Modal from "@/components/Modal/Modal";
-import NoteForm from "@/components/NoteForm/NoteForm";
 import NoteList from "@/components/NoteList/NoteList";
 import {useDebouncedCallback} from 'use-debounce';
 import Link from "next/link";
 
 type Props = {
-    category?: Tag;
+    tag?: Tag;
 };
 
-const NotesClient = ({category}: Props) => {
+const NotesClient = ({tag}: Props) => {
 
 
     const [currentPage, setCurrentPage] = useState(1);
@@ -25,8 +23,8 @@ const NotesClient = ({category}: Props) => {
     const [query, setQuery] = useState('');
 
     const {data, isLoading, isError, isSuccess} = useQuery({
-        queryKey: ['notes', category ?? 'all', query, currentPage],
-        queryFn: () => fetchNotes(currentPage, query, category),
+        queryKey: ['notes', tag ?? 'all', query, currentPage],
+        queryFn: () => fetchNotes(currentPage, query, tag),
         placeholderData: keepPreviousData,
     });
 

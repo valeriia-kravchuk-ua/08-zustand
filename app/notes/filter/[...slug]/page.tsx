@@ -15,11 +15,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const {notes} = await fetchNotes(initialPage, initialQuery, category)
     return {
         title: `Note filter: ${category ?? 'All'}`,
-        description: "Note filter by category",
+        description: `Note filter by ${category ?? 'All'}`,
         openGraph: {
             title: `Note filter: ${category ?? 'All'}`,
-            description: "Note filter by category",
-            url: `https://notehub.com/notes/filter/${notes.map(note=>note.tag)}`,
+            description: `Note filter by ${category ?? 'All'}`,
+            url: `https://notehub.com/notes/filter/${category ?? 'All'}`,
             siteName: 'NoteHub',
             images: [
                 {
@@ -48,7 +48,7 @@ export default async function DocsPage({params}: Props) {
     return (
         <div>
             <HydrationBoundary state={dehydrate(queryClient)}>
-                <NotesClient category={category} />
+                <NotesClient tag={category} />
             </HydrationBoundary>
         </div>
     );

@@ -2,13 +2,21 @@ import {create} from 'zustand';
 import {OrderFormValues} from "@/lib/api";
 import {persist} from "zustand/middleware";
 
+export type NoteTag = 'Todo' | 'Work' | 'Personal' | 'Meeting' | 'Shopping';
+
+export type NoteDraft = {
+    title: string;
+    content: string;
+    tag: NoteTag;
+};
+
 type NoteDraftStore = {
-    draft: OrderFormValues;
-    setDraft: (note: OrderFormValues) => void;
+    draft: NoteDraft;
+    setDraft: (note: NoteDraft) => void;
     clearDraft: () => void;
 };
 
-const initialDraft: OrderFormValues = {
+const initialDraft: NoteDraft = {
     title: '',
     content: '',
     tag: 'Todo',
